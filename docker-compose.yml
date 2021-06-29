@@ -7,13 +7,17 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      network: host
-    args:
-      - CERTBOT_EMAIL=chistyitruefalse@gmail.com #replace with your own email
-      - DOMAIN_LIST=testtest01.ml www.testtest01.ml #replace with your own domains
     restart: always
     volumes:
-      - letsencrypt:/etc/letsencrypt
+        - ./certbot/conf:/etc/nginx/ssl
+        - ./certbot/data:/var/www/certbot
     ports:
         - "80:80"
         - "443:443"
+ certbot:
+    image: certbot/certbot:latest
+    command: certonly --webroot --webroot-path=/var/www/certbot --email chistyitruefalse@gmail.com --agree-tos --no-eff-email -d testtest01.ml -d www.testtest01.ml
+    volumes:
+        - ./certbot/conf:/etc/letsencrypt
+        - ./certbot/logs:/var/log/letsencrypt
+        - ./certbot/data:/var/www/certbot

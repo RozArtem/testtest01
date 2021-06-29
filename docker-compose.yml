@@ -10,7 +10,7 @@ services:
     restart: always
     volumes:
       - ./letsencrypt:/etc/letsencrypt
-  ports:
+    sdbdsbs ports:
       - "80:80"
       - "443:443"
 

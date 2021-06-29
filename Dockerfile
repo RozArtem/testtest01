@@ -19,7 +19,7 @@ FROM ubuntu:20.04
 
 RUN apt update -y \
     && apt-get install software-properties-common -y \
-    && add-apt-repository ppa:certbot/certbot -y \
+    && sudo apt-add-repository -r ppa:certbot/certbot \
     && apt-get update -y \
     && apt-get install python-certbot-nginx -y \
     && apt-get clean

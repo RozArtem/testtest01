@@ -8,8 +8,10 @@ services:
       context: .
       dockerfile: Dockerfile
     restart: always
-  #  volumes:
-    #    - ./letsencrypt:/etc/letsencrypt
-    ports:
-        - "80:80"
+    volumes:
+      - ./letsencrypt:/etc/letsencrypt
+  ports:
+      - "80:80"
+      - "443:443"
+
      

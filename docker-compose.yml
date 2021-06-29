@@ -7,5 +7,13 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      network: host
+    args:
+      - CERTBOT_EMAIL=chistyitruefalse@gmail.com #replace with your own email
+      - DOMAIN_LIST=testtest01.ml www.testtest01.ml #replace with your own domains
+    restart: always
+    volumes:
+      - letsencrypt:/etc/letsencrypt
     ports:
-      - '80:80'
+        - "80:80"
+        - "443:443"

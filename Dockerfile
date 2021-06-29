@@ -15,6 +15,7 @@ COPY --from=build /app/build /usr/share/nginx/html
 # new
 COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
+FROM ubuntu:20.04
 
 RUN apt update -y \
     && apt-get install software-properties-common -y \

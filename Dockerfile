@@ -14,5 +14,17 @@ FROM nginx:stable-alpine
 COPY --from=build /app/build /usr/share/nginx/html
 # new
 COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
+
+
+RUN apt update -y \
+    && apt-get install software-properties-common -y \
+    && add-apt-repository ppa:certbot/certbot -y \
+    && apt-get update -y \
+    && apt-get install python-certbot-nginx -y \
+    && apt-get clean
+
 EXPOSE 80 443
+
+STOPSIGNAL SIGTERM
+
 CMD ["nginx", "-g", "daemon off;"]

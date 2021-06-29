@@ -15,17 +15,5 @@ COPY --from=build /app/build /usr/share/nginx/html
 # new
 COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
-FROM ubuntu:20.04
-
-RUN apt update -y \
-    && apt-get install software-properties-common -y \
-    && apt-add-repository -r ppa:certbot/certbot \
-    && apt-get update -y \
-    && apt-get install python3-certbot-nginx -y \
-    && apt-get clean
-
-
-
-STOPSIGNAL SIGTERM
 
 CMD ["nginx", "-g", "daemon off;"]
